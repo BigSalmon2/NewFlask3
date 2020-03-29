@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Natural Language Processing App</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="static/css/main.css" />
+		<noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-gem"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Text Generation with NLP</h1>
+								<div class="container">
+									<form method="POST" action="/predict">
+										<label >Enter Your Text Below</label>
+								    <textarea class="form-control" rows="3" name="rawtext"></textarea>
+								    <input type="submit" value="Submit" class="btn btn-primary ">
+								    <input type="reset" value="Clear" class="btn btn-outline-dark">
+										<a href="{{ url_for('index')}}" class="button">Reset</a>
+									</form>
+								</div>
+								<h5>Genrated text:</h5>
+					    		<p style="color:#0091EA;font-family:sans-serif;">{{ prediction }}</p>
+									<br/>
+									<p>Time Elapsed: <span style="color:#0091EA;">{{ final_time }} </span> seconds to analyse</p>
+							</div>
+						</div>
+					</header>
+
+				<!-- Main -->
+					<!-- <div id="main">
+					</div> -->
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="https://twitter.com/jja2136" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="https://github.com/Fudoshin2596" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/browser.min.js"></script>
+			<script src="static/js/breakpoints.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+			<script>
+			function myFunction() {
+			    document.getElementById("myForm").reset();
+			}
+			</script>
+
+	</body>
+</html>

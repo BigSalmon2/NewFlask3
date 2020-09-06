@@ -3,7 +3,156 @@
 <html>
 	<head>
 		<title>Natural Language Processing App</title>
-		<meta charset="utf-8" />
+		<meta charset="utf-8" /><html><head><script type="text/javascript">
+    (function() {
+      var container = document.querySelector('#_tcx-i0c7zigs9kf');
+      if (!container) {
+        return;
+      }
+
+      function addToContainer(url, text) {
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('data-tcx-url', url);
+        wrapper.innerText = text;
+        container.appendChild(wrapper);
+      }
+
+      const fetch = window.fetch
+      window.fetch = function() {
+        return Promise.resolve(fetch.apply(window, arguments))
+            .then(async response => {
+              if (response.ok) {
+                try {
+                  const clone = response.clone();
+                  const json = await clone.json();
+                  addToContainer(clone.url, JSON.stringify(json));
+                } catch (err) {}
+              }
+              return response;
+            });
+      };
+
+      var XHR = XMLHttpRequest.prototype;
+      var send = XHR.send;
+      var open = XHR.open;
+      XHR.open = function(method, url) {
+        this.url = url;
+        return open.apply(this, arguments);
+      };
+      XHR.send = function() {
+        this.addEventListener('load', function() {
+          try {
+            const response = this.response;
+            if (response && response.length) {
+              const firstChar = response[0];
+              if (firstChar === '[' || firstChar === '{') {
+                addToContainer(this.url, response);
+              }
+            }
+          } catch (err) {
+            // No-op.
+          }
+        });
+        return send.apply(this, arguments);
+      };
+    })();
+  </script>
+		<title>Natural Language Processing App</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="static/css/main.css">
+		<noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
+	<style type="text/css">@font-face {
+    font-family: Source Sans Pro SB;
+    src: url("chrome-extension://jcbfebakonmpfdgeflcomgpgefmbhlck/fonts/source-300.woff2");
+    font-weight: 300;
+  }
+  @font-face {
+    font-family: Source Sans Pro SB;
+    src: url("chrome-extension://jcbfebakonmpfdgeflcomgpgefmbhlck/fonts/source-400.woff2");
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: Source Sans Pro SB;
+    src: url("chrome-extension://jcbfebakonmpfdgeflcomgpgefmbhlck/fonts/source-600.woff2");
+    font-weight: 600;
+  }
+  @font-face {
+    font-family: Source Sans Pro SB;
+    src: url("chrome-extension://jcbfebakonmpfdgeflcomgpgefmbhlck/fonts/source-700.woff2");
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: Source Sans Pro SB;
+    src: url("chrome-extension://jcbfebakonmpfdgeflcomgpgefmbhlck/fonts/source-900.woff2");
+    font-weight: 900;
+  }</style><meta id="Reverso_extension___elForCheckedInstallExtension" name="Reverso extension" content="2.2.202"></head>
+	<body class="" style=""><div id="quickAcces-4816" style="display: none;"></div>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-gem"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Text Generation with NLP</h1>
+								<div class="container">
+									<form method="POST" action="/predict">
+										<label>Enter Your Text Below</label>
+								    <textarea class="form-control" rows="2" name="rawtext"></textarea>
+								    <input type="submit" value="Submit" class="btn btn-primary ">
+								    <input type="reset" value="Clear" class="btn btn-outline-dark">
+										<a href="/" class="button">Reset</a>
+									</form>
+								</div>
+								<h5>Genrated text:</h5>
+					    		
+									
+									
+							</div>
+						<table> <tbody>{{ prediction|safe }} </tbody> </table></div></div> </header>
+					</header>
+
+				<!-- Main -->
+					<!-- <div id="main">
+					</div> -->
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="https://twitter.com/jja2136" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="https://github.com/Fudoshin2596" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/browser.min.js"></script>
+			<script src="static/js/breakpoints.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+			<script>
+			function myFunction() {
+			    document.getElementById("myForm").reset();
+			}
+			</script>
+
+	
+<div class="summary-popup"></div><div id="weava-permanent-marker" date="1599338655756"></div><div id="weava-ui-wrapper"><div class="weava-drop-area-wrapper"><div class="weava-drop-area"></div>
+<div class="weava-drop-area-text">Drop here!</div>
+</div></div></body></html>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="static/css/main.css" />
 		<noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>

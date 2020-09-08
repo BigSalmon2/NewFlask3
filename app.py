@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
+from tabulate import tabulate
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from flask import request

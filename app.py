@@ -3,12 +3,12 @@ from flask import Flask, render_template, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
-from tabulate import tabulate
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from flask import request
 import random
 import time
+import json
 
 app = Flask(__name__, root_path='/content/GLPAPP')
 app.config['SECRET_KEY'] = '9bad6913d4358ac1395c5c94370ed090'
@@ -21,23 +21,40 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/cool_form', methods=['GET', 'POST'])
+def cool_form():
+    if request.method == 'POST':
+        # do stuff when the form is submitted
+
+        # redirect to end the POST handling
+        # the redirect can be to the same route or somewhere else
+        return redirect(url_for('index'))
+
+    # show the form, it wasn't submitted
+    return render_template('cool_form.html')
+
+
 @app.route('/predict', methods=["POST"])
 def predict():
     start = time.time()
     if request.method == 'POST':
         text1 = request.form['rawtext']
+        m = text1
         text = tokenizer.encode(text1)
         myinput, past = torch.tensor([text]), None
 
 ###
+
+#bad words
+
         logits, past = model(myinput, past = past)
         logits = logits[0,-1]
         probabilities = torch.nn.functional.softmax(logits)
-        best_logits, best_indices = logits.topk(540)
+        best_logits, best_indices = logits.topk(780)
         best_words = [tokenizer.decode([idx.item()]) for idx in best_indices]
         text.append(best_indices[0].item())
         best_probabilities = probabilities[best_indices].tolist()
-        for i in range(540):
+        for i in range(780):
             f = ('Generated {}: {}'.format(i, best_words[i]))
             print(f)
         #options = get_preds(text)
@@ -121,15 +138,41 @@ def predict():
         table = [best_words[740:760]]
         p30 = (tabulate(table, tablefmt='html'))
         table = [best_words[760:780]]
-
-
-
     end = time.time()
     final_time = '{:.2f}'.format((end-start))
-    return render_template('index.html', prediction=('{}'.format(p)), prediction2=('{}'.format(p2)), prediction3=('{}'.format(p3)),  prediction4=('{}'.format(p4)), prediction5=('{}'.format(p5)), prediction6=('{}'.format(p6)), prediction7=('{}'.format(p7)), prediction8=('{}'.format(p8)), prediction9=('{}'.format(p9)), prediction10=('{}'.format(p10)), prediction11=('{}'.format(p11)),  prediction12=('{}'.format(p12)), prediction13=('{}'.format(p13)), prediction14=('{}'.format(p14)), prediction15=('{}'.format(p15)), prediction16=('{}'.format(p16)),  prediction17=('{}'.format(p17)),  prediction18=('{}'.format(p18)),  prediction19=('{}'.format(p19)), prediction20=('{}'.format(p20)), prediction21=('{}'.format(p21)), prediction22=('{}'.format(p22)), prediction23=('{}'.format(p23)), prediction24=('{}'.format(p24)), prediction25=('{}'.format(p25)), prediction26=('{}'.format(p26)), prediction27=('{}'.format(p27)), prediction28=('{}'.format(p28)), prediction29=('{}'.format(p29)), prediction30=('{}'.format(p30)), final_time=final_time, text1=text1)
+    return render_template('index.html', m = text1, prediction=('{}'.format(p)), prediction2=('{}'.format(p2)), prediction3=('{}'.format(p3)),  prediction4=('{}'.format(p4)), prediction5=('{}'.format(p5)), prediction6=('{}'.format(p6)), prediction7=('{}'.format(p7)), prediction8=('{}'.format(p8)), prediction9=('{}'.format(p9)), prediction10=('{}'.format(p10)), prediction11=('{}'.format(p11)),  prediction12=('{}'.format(p12)), prediction13=('{}'.format(p13)), prediction14=('{}'.format(p14)), prediction15=('{}'.format(p15)), prediction16=('{}'.format(p16)),  prediction17=('{}'.format(p17)),  prediction18=('{}'.format(p18)),  prediction19=('{}'.format(p19)), prediction20=('{}'.format(p20)), prediction21=('{}'.format(p21)), prediction22=('{}'.format(p22)), prediction23=('{}'.format(p23)), prediction24=('{}'.format(p24)), prediction25=('{}'.format(p25)), prediction26=('{}'.format(p26)), prediction27=('{}'.format(p27)), prediction28=('{}'.format(p28)), prediction29=('{}'.format(p29)), prediction30=('{}'.format(p30)), final_time=final_time, text1=text1)
     #return render_template('index.html', prediction=('{}  | | | | |  Generated {}: {}'.format(text1, i, best_words[0:500])), final_time=final_time)
 
 
+@app.route('/get_end_predictions', methods=['post'])
+def get_prediction_eos():
+    try:
+        input_text = ' '.join(request.json['input_text'].split())
+        input_text += ' <mask>'
+        top_k = request.json['top_k']
+        res = get_all_predictions(input_text, top_clean=int(top_k))
+        return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
+    except Exception as error:
+        err = str(error)
+        print(err)
+        return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
+
+
+@app.route('/get_mask_predictions', methods=['post'])
+def get_prediction_mask():
+    try:
+        input_text = ' '.join(request.json['input_text'].split())
+        top_k = request.json['top_k']
+        res = get_all_predictions(input_text, top_clean=int(top_k))
+        return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
+    except Exception as error:
+        err = str(error)
+        print(err)
+        return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
+
+# Today, individuals worldwide are experiencing the loss of their basic right to privacy. 
+
+#on account of
 
 if __name__ == '__main__':
     app.run()

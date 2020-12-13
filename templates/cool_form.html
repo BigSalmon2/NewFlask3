@@ -76,7 +76,7 @@
 
             <!-- MASKED PREDICTION -->
             <center>
-                <h3>Masked Word Prediction</h3>
+                <h3>GPT-2 Next Word:</h3>
             </center>
 
             <div class="form-row">
@@ -87,7 +87,7 @@
                 <div class="form-group col-md-2">
                     <br>
                     <label for="max_words" id="label_max_words">Top k words: 5</label>
-                    <input type="range" class="custom-range" min="1" max="10" value="5" step="1" id="max_words_mask">
+                    <input type="range" class="custom-range" min="1" max="100" value="5" step="1" id="max_words_mask">
                 </div>
                 <div class="form-group col-md-2">
                     <label></label>
@@ -101,27 +101,27 @@
             <h4> Predictions </h4>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">BERT</label>
+                    <label for="text_paragraphs"></label>
                     <textarea class="form-control txt_response" id="mask_text_bert" readonly rows="1"></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">XLNET</label>
+                    <label for="text_paragraphs"></label>
                     <textarea class="form-control txt_response" id="mask_text_xlnet" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">XLM-Roberta</label>
+                    <label for="text_paragraphs"></label>
                     <textarea class="form-control txt_response" id="mask_text_xlm" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">BART</label>
+                    <label for="text_paragraphs"></label>
                     <textarea class="form-control txt_response" id="mask_text_bart" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">ELECTRA</label>
+                    <label for="text_paragraphs"></label>
                     <textarea class="form-control txt_response" id="mask_text_electra" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">ROBERTA</label>
+                    <label for="text_paragraphs"></label>
                     <textarea class="form-control txt_response" id="mask_text_roberta" readonly></textarea>
                 </div>
             </div>
@@ -180,7 +180,8 @@ h4 {
 
 .txt_response {
 	background-color: #FFF !important;
-	height: 150px !important;
+	height: 300px !important;
+    width: 150px;
 }
 
 #max_paragraphs {

@@ -13,6 +13,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 def index():
     return render_template('index.html')
 
+from transformers import AutoTokenizer, AutoModelWithLMHead
+tokenizer = AutoTokenizer.from_pretrained("gpt2")
+model = AutoModelWithLMHead.from_pretrained("gpt2")
+
 
 @app.route('/cool_form', methods=['GET', 'POST'])
 def cool_form():

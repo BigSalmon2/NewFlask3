@@ -11,9 +11,6 @@ import time
 import json
 
 app = Flask(__name__, root_path='/content/GLPAPP')
-app.config['SECRET_KEY'] = '9bad6913d4358ac1395c5c94370ed090'
-run_with_ngrok(app)
-print(app.root_path)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 @app.route('/')
@@ -175,4 +172,5 @@ def get_prediction_mask():
 #on account of
 
 if __name__ == '__main__':
-    app.run()
+    from waitress import serve
+    serve(app, host='0.0.0.0', port=80)

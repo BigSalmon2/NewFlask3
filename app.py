@@ -1,14 +1,10 @@
-from flask_ngrok import run_with_ngrok
-from flask import Flask, render_template, url_for
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from flask import request
 import random
 import time
 import json
+from  tabulate import tabulate
 
 app = Flask(__name__, root_path='/content/GLPAPP')
 

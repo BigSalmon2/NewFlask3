@@ -6,7 +6,7 @@ import time
 import json
 from  tabulate import tabulate
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 device = torch.device("cpu")
 @app.route('/')

@@ -9,7 +9,7 @@ RUN pip install transformers \
     tensorboard \
     wandb
 
-RUN pip install flask && pip install waitress
+RUN pip install flask && pip install waitress && pip install tabulate
 
 WORKDIR /gpt2_story/
 EXPOSE 80

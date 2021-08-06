@@ -11,7 +11,7 @@ RUN pip install transformers \
 
 RUN pip install flask && pip install waitress && pip install tabulate
 
-WORKDIR /gpt2_story/
+WORKDIR /predict/
 EXPOSE 80
 COPY . .
-ENTRYPOINT ["python", "server.py"]
+ENTRYPOINT ["python", "app.py"]

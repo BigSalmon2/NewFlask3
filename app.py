@@ -6,9 +6,9 @@ import time
 import json
 from  tabulate import tabulate
 
-app = Flask(__name__, root_path='/content/GLPAPP')
+app = Flask(__name__)
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device("cpu")
 @app.route('/')
 def index():
     return render_template('index.html')

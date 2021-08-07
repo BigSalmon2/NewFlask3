@@ -8,8 +8,11 @@ RUN pip install --upgrade pip
 RUN pip install transformers \
     tensorboard \
     wandb
+    
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-RUN pip install flask && pip install waitress && pip install tabulate
+RUN pip install flask && pip install waitress 
 
 WORKDIR /predict/
 EXPOSE 80

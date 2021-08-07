@@ -3,3 +3,4 @@ torch
 gunicorn==20.0.4
 numpy==1.18.2
 transformers==2.6.0
+tabulate
